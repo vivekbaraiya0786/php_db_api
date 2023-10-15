@@ -44,14 +44,20 @@ if (isset($_POST['update_btn'])) {
 <body>
     <div class="container pt-5">
         <div class="col-5">
+           <div class="container pt-5">
+            <div class="col-5">
             <form action="" method="POST">
-                <input type="hidden" name="update_id" value="<?php echo $single_record['id']; ?>">
+                <input type="hidden" name="update_id" value="<?php echo $single_record['id']; ?>"><br/>
                 ID: <input class="form-control" type="number" name="id" value="<?php echo $single_record['id']; ?>"> <br/>
                 NAME: <input class="form-control" type="text" name="name" value="<?php echo $single_record['name']; ?>"> <br/>
                 POST: <input class="form-control" type="text" name="post" value="<?php echo $single_record['post']; ?>"> <br/>
                 SALARY: <input class="form-control" type="number" name="salary" value="<?php echo $single_record['salary']; ?>"> <br/>
+
                 <button type="submit" class="btn btn-danger" name="update_btn">Update</button>
             </form>
+            </div>
+            
+           </div>
 
             <table class="table table-striped table-hover">
                 <thead>

@@ -14,17 +14,38 @@ class User_Config {
         return $this->connect_res;
     }
 
-    public function user_insert($id, $name,$email,$password) {
+    public function user_insert($name,$email,$password) {
         $this->connect();
-        $id = mysqli_real_escape_string($this->connect_res, $id); 
-        $name = mysqli_real_escape_string($this->connect_res, $name); 
-        $email = mysqli_real_escape_string($this->connect_res, $email); 
-        $password = mysqli_real_escape_string($this->connect_res, $password); 
-        $query = "INSERT INTO users VALUES('$id', '$name','$email','$password');"; 
+
+       $hash_password =  password_hash($password,PASSWORD_DEFAULT);//hash alogorithm in form string
+
+        // $name = mysqli_real_escape_string($this->connect_res, $name); 
+        // $email = mysqli_real_escape_string($this->connect_res, $email); 
+        // $password = mysqli_real_escape_string($this->connect_res, $password); 
+        $query = "INSERT INTO users(name,email,password) VALUES('$name','$email','$hash_password');"; 
         $res = mysqli_query($this->connect_res, $query); 
         return $res;
     }
 
+    public function sign_in($email,$password){
+        $this->connect();
+
+        $query = "SELECT * FROM users WHERE email='$email';";
+
+        $obj =mysqli_query($this->connect_res,$query); //return object
+
+        $record = mysqli_fetch_assoc($obj);
+
+        $_hash_password = $record['password'];
+
+        $is_password_verified = password_verify($password,$_hash_password); //return boolean
+
+        if($is_password_verified){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public function fetch_data() {
         $this->connect();
         $query = "SELECT * FROM users"; 

@@ -5,17 +5,17 @@
     $config = new User_Config();
 
     if($_SERVER['REQUEST_METHOD']=="POST"){
-        $name = $_POST['name'];
+       
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $res = $config->user_insert($name,$email,$password);
+        $res = $config->sign_in($email,$password);
 
         if($res){
-            $arr['data'] = "User Record inserted....";
+            $arr['data'] = "User Sign In succefully....";
             http_response_code(201);
         }else{
-            $arr['data'] = "User Record not inserted....";
+            $arr['data'] = "User Sign in failed....";
         }
     }else{
         $arr['error'] = "Only POST Method are allowed...";

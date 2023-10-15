@@ -3,15 +3,14 @@ include("config.php");
 
 $config = new Config();
 
-$fetch_records = $config->fetch_data();
 
 if(isset($_REQUEST['submit_btn'])){
-    $id = $_GET['id'];
+
     $name = $_GET['name'];
     $post = $_GET['post'];
     $salary = $_GET['salary'];
 
-    $res = $config->insert($id,$name,$post,$salary); //return bool
+    $res = $config->insert($name,$post,$salary); //return bool
     if($res){
         echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>Record Inserted</strong> Record Inserted Successfully.

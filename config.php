@@ -14,13 +14,13 @@ class Config {
         return $this->connect_res;
     }
 
-    public function insert($id, $name,$post,$salary) {
+    public function insert($name,$post,$salary) {
         $this->connect();
-        $id = mysqli_real_escape_string($this->connect_res, $id); 
-        $name = mysqli_real_escape_string($this->connect_res, $name); 
-        $post = mysqli_real_escape_string($this->connect_res, $post); 
-        $salary = mysqli_real_escape_string($this->connect_res, $salary); 
-        $query = "INSERT INTO employee VALUES('$id', '$name','$post','$salary');"; 
+        // $id = mysqli_real_escape_string($this->connect_res, $id); 
+        // $name = mysqli_real_escape_string($this->connect_res, $name); 
+        // $post = mysqli_real_escape_string($this->connect_res, $post); 
+        // $salary = mysqli_real_escape_string($this->connect_res, $salary); 
+        $query = "INSERT INTO employee(name,post,salary) VALUES('$name','$post','$salary');"; 
         $res = mysqli_query($this->connect_res, $query); 
         return $res;
     }
@@ -34,6 +34,7 @@ class Config {
 
     public function delete($id) {
         $this->connect();
+        
         $query = "DELETE FROM employee WHERE id=$id"; 
         $res = mysqli_query($this->connect_res, $query); 
         return $res;            // return bool
